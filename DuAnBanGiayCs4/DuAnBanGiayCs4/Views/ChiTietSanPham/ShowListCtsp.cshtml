@@ -1,0 +1,101 @@
+﻿@model IEnumerable<DuAnBanGiayCs4.Models.ChiTietSanPham>
+
+@{
+    ViewData["Title"] = "ShowListCtsp";
+}
+
+<h1>ShowListCtsp</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SanPham.TenSp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Anh.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size.SoSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MauSac.TenMau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nsx.TenNsx)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loai.TenLoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongTon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.TenSp)
+            </td>
+            <td>
+                <img src="@Url.Action("GetImage", "Images", new { id = item.Id })" alt="@item.Anh.Url" style="max-width: 200px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size.SoSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MauSac.TenMau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nsx.TenNsx)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Loai.TenLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaNhap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new {id=item.Id  }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

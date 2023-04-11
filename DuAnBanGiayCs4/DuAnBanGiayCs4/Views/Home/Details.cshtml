@@ -1,0 +1,190 @@
+﻿@using System.Diagnostics;
+@using Microsoft.AspNetCore.Http
+@model DuAnBanGiayCs4.Models.ChiTietSanPham
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var user = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+    ViewData["Title"] = "Details";
+    var culture = new System.Globalization.CultureInfo("vi-VN");
+    
+}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Product Card/Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/css/Details.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" asp-append-version="true"/>
+    
+</head>
+  <body>
+    
+    <div class = "card-wrapper">
+      <div class = "card">
+        <!-- card left -->
+        <div class = "product-imgs">
+          <div class = "img-display">
+            <div class = "img-showcase">
+              <img src="~/Anh/@Model.Anh.Url" alt = "shoe image">
+              <img src="~/Anh/@Model.Anh.Url1" alt = "shoe image">
+              <img src="~/Anh/@Model.Anh.Url2" alt = "shoe image">
+              <img src="~/Anh/@Model.Anh.Url3" alt = "shoe image">
+            </div>
+          </div>
+          <div class = "img-select">
+             <div class = "img-item">
+              <a href = "#" data-id = "2">
+                <img style="width:130px" src="~/Anh/@Model.Anh.Url" alt = "shoe image">
+              </a>
+            </div>
+            <div class = "img-item">
+              <a href = "#" data-id = "2">
+                <img src="~/Anh/@Model.Anh.Url1" alt = "shoe image">
+              </a>
+            </div>
+            <div class = "img-item">
+              <a href = "#" data-id = "3">
+                <img src="~/Anh/@Model.Anh.Url2" alt = "shoe image">
+              </a>
+            </div>
+            <div class = "img-item">
+              <a href = "#" data-id = "4">
+                <img src="~/Anh/@Model.Anh.Url3" alt = "shoe image">
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- card right -->
+        <div class = "product-content">
+          <h2 class = "product-title">@(Model.SanPham.TenSp +" "+ Model.Nsx.TenNsx) </h2>
+          <a href = "#" class = "product-link">visit nike store</a>
+          <div class = "product-rating">
+            <i class = "fas fa-star"></i>
+            <i class = "fas fa-star"></i>
+            <i class = "fas fa-star"></i>
+            <i class = "fas fa-star"></i>
+            <i class = "fas fa-star-half-alt"></i>
+            <span>4.7(21)</span>
+          </div>
+
+          <div class = "product-price">
+            <p class = "last-price">Old Price: <span>@((Model.GiaBan*1.25).ToString("C0",culture))</span></p>
+            <p class = "new-price">New Price: <span>@Model.GiaBan.ToString("C0",culture) (20%)</span></p>
+          </div>
+
+          <div class = "product-detail">
+            <h2>about this item: </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+            <ul>
+              <li>Color:<span>
+                  <select id="ColorId" onchange="getProductDetails()">
+                                @foreach( var color in ViewBag.Color)
+                                {
+                                    <option value="@color.Value" selected="@(Guid.Parse(color.Value) == Model.IdColor ? "selected" : null)" style="white-space: nowrap;">@color.Text</option>
+                                }
+                                </select>
+                         </span>
+              </li>
+              <li>Size: <span>
+                  <select id="ColorId" onchange="getProductDetails()">
+                                @foreach( var size in ViewBag.Size)
+                                {
+                                    <option value="@size.Value" selected="@(Guid.Parse(size.Value) == Model.IdSize ? "selected" : null)" style="white-space: nowrap;">@size.Text</option>
+                                }
+                                </select>
+              </span></li>
+              <li>Available: <span>in stock</span></li>
+              <li>Category: <span>Shoes</span></li>
+              <li>Shipping Area: <span>All over the world</span></li>
+              <li>Shipping Fee: <span>Free</span></li>
+            </ul>
+          </div>
+
+          <div class = "purchase-info">
+            <input type = "number" min = "1" value = "1" id="slSp">
+            @if(!string.IsNullOrEmpty(user)){
+                        <a onclick="AddToCartDetails()" type = "button" class = "btn">
+                            Add to Cart <i class = "fas fa-shopping-cart"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="IndexLogin" asp-controller="User" type = "button" class = "btn">
+                            Add to Cart <i class = "fas fa-shopping-cart"></i>
+                        </a>
+                    }
+            <button type = "button" class = "btn">Compare</button>
+          </div>
+
+          <div class = "social-links">
+            <p>Share At: </p>
+            <a href = "#">
+              <i class = "fab fa-facebook-f"></i>
+            </a>
+            <a href = "#">
+              <i class = "fab fa-twitter"></i>
+            </a>
+            <a href = "#">
+              <i class = "fab fa-instagram"></i>
+            </a>
+            <a href = "#">
+              <i class = "fab fa-whatsapp"></i>
+            </a>
+            <a href = "#">
+              <i class = "fab fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script>
+        const imgs = document.querySelectorAll('.img-select a');
+        const imgBtns = [...imgs];
+        let imgId = 1;
+
+        imgBtns.forEach((imgItem) => {
+        imgItem.addEventListener('click', (event) => {
+        event.preventDefault();
+        imgId = imgItem.dataset.id;
+        slideImage();
+         });
+        });
+
+        function slideImage(){
+        const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+        document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+        }   
+
+        window.addEventListener('resize', slideImage);
+    </script>
+  </body>
+</html>
+@{
+    var Getid = Model.Id;
+}
+<script>
+    var Getid = "@Getid";
+    function AddToCartDetails() {
+        var sl = $('#slSp').val();
+        var temp=sl;
+        $.ajax({
+            url: '/Home/AddToCart',
+            type: 'POST',
+            data: { id: Getid, n: sl },
+            success: function (result) {
+                alert('Thêm thành công');
+            },
+            error: function (xhr, status, error) {
+                alert('Error occurred while adding product to cart.');
+            }
+        });
+    }
+
+</script>

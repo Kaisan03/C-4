@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DuAnBanGiayCs4.props" />
+</Project>

@@ -1,0 +1,252 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+    string role = HttpContextAccessor.HttpContext.Session.GetString("Role");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DuAnBanGiayCs4</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DuAnBanGiayCs4.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/TrangChuCss.css">
+    <link rel="stylesheet" href="~/assetsLayout/css/vendor/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/assetsLayout/css/vendor/Pe-icon-7-stroke.css" />
+
+    <!-- Plugin CSS (Global Plugins Files) -->
+    <link rel="stylesheet" href="~/assetsLayout/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="~/assetsLayout/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/assetsLayout/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/assetsLayout/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="~/assetsLayout/css/plugins/magnific-popup.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" asp-append-version="true"></script>
+</head>
+
+<body>
+    <header style="border-bottom: 1px solid #000;">
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="TrangChu" icon="">DuAnBanGiayCs4</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TrangChu">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TrangChu">Trang chủ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+        <nav>
+            <ul class="nav__links">
+                <li>
+                    <a href="#">NEW ARRIVALS</a>
+                </li>
+                <li>
+                    <a href="#">WOMEN</a>
+                </li>
+                <li>
+                    <a href="#">MEN</a>
+                </li>
+                <li>
+                    <a href="#">ADIAS</a>
+                </li>
+                <li>
+                    <a href="#">BAGS</a>
+                </li>
+                <li>
+                    <a href="#">GIFT SHOP</a>
+                </li>
+                <li>
+                    <a href="detail.html">Chi tiết sản phẩm</a>
+                </li>
+            </ul>
+        </nav>
+        <a ><img class="logo"
+            src="https://www.balenciaga.com/on/demandware.static/-/Sites/default/dw4a689780/images/logo/BAL/logo.svg"
+            alt="Balenciaga - Go to the Homepage">
+        </a>
+        <nav class="nav-r">
+            <ul class="nav__links">
+                <li class="nav-link text-dark">
+
+                    @if (!string.IsNullOrEmpty(userName))
+                    {
+                        <div>
+                            <i class="p-2 bd-highlight pe-7s-users"></i>
+                            <div class="p-2 bd-highlight" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:15px;font-weight:bold;color:orangered">@userName</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <i class="pe-7s-users"></i>
+                    }
+
+
+            </li>
+                @if (role == "Admin") {
+                <li>
+                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Anh" asp-action="Index">Quản trị</a>
+                </li>}
+                <li>
+                    @if(userName!=null){
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ShowCart">Giỏ hàng</a>
+                    }else{
+                        <a class="nav-link text-dark" >Giỏ hàng</a>
+                    }
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SanPham">Sản phẩm</a>
+                </li>
+                @if (!string.IsNullOrEmpty(userName))
+                    {
+                        <li><a class="nav-link text-dark" asp-controller="User" asp-action="LogOut">Đăng xuất</a></li>
+                    }
+                else{
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="IndexLogin">Đăng nhập</a>
+                        </li>
+                    }
+                
+                 
+            @if (!string.IsNullOrEmpty(userName))
+            {
+                <li class="d-none d-md-block">
+                    <a>
+                        <i class="pe-7s-like"></i>
+                    </a>
+                </li>
+                <li class="d-block d-lg-none">
+                    <a class="search-btn toolbar-btn">
+                        <i class="pe-7s-search"></i>
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="MyCart" class="minicart-btn">
+                        <i class="pe-7s-shopbag"></i>
+                        @*<span class="quantity">3</span>*@
+                    </a>
+                </li>
+                <li class="mobile-menu_wrap d-block d-lg-none">
+                    <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
+                        <i class="pe-7s-menu"></i>
+                    </a>
+                </li>
+                                        }
+            </ul>
+            <ul>
+                                       
+            </ul>
+        </nav>
+   </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-white">
+    <div class="container py-5">
+      <div class="row py-3">
+
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">About</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Contact Us</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">About Us</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Stories</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Press</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Help</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Payments</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Shipping</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Cancellation</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Returns</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Policy</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Return Policy</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Terms Of Use</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Security</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Privacy</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Sitemap</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Registered Office Address</h6>
+          <p class="text-muted mb-4">Here , write the complete address of the Registered office address along with telephone number.</p>
+          <ul class="list-inline mt-4">
+            <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fab  fa-2x fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fab fa-2x fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fab fa-2x fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fab fa-2x fa-youtube"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fab fa-2x fa-google"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="p-0 m-0 b-0">
+
+   
+    <div class="bg-light py-2">
+      <div class="container text-center">
+        <p class="text-muted mb-0 py-2">&copy; 2019 BBBootstrap All risghts reserved.</p>
+        
+        </div>
+      </div>
+    
+  </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/assetsLayout/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="~/assetsLayout/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="~/assetsLayout/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="~/assetsLayout/js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="~/assetsLayout/js/vendor/jquery.waypoints.js"></script>
+
+    <!--Plugins JS-->
+    <script src="~/assetsLayout/js/plugins/wow.min.js"></script>
+    <script src="~/assetsLayout/js/plugins/jquery-ui.min.js"></script>
+    <script src="~/assetsLayout/js/plugins/swiper-bundle.min.js"></script>
+    <script src="~/assetsLayout/js/plugins/jquery.nice-select.js"></script>
+    <script src="~/assetsLayout/js/plugins/parallax.min.js"></script>
+    <script src="~/assetsLayout/js/plugins/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/notify.js"></script>
+
+    <!--Main JS (Common Activation Codes)-->
+    <script src="~/assetsLayout/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\DuAnBanGiayCs4.props" />
+</Project>

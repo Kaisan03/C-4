@@ -1,0 +1,172 @@
+﻿@model IEnumerable<DuAnBanGiayCs4.Models.ChiTietSanPham>
+@{
+var culture = new System.Globalization.CultureInfo("vi-VN");
+}
+<form width="100%">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" asp-append-version="true">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/SanPham.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/lstSanPham.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DuAnBanGiayCs4.styles.css" asp-append-version="true" />
+    <div class="c-topsearch__result" data-action="activateOpenSearch">
+        <input class="c-form__input" type="search" name="q" value="" placeholder="Adidas, Hourglass, Speed..."
+            autocomplete="off" aria-label="Termes à rechercher" aria-describedby="c-topsearch__description"
+            data-ref="topSearchInput" data-action="topSearchInputKeypress" data-min="3" data-max-sugg="10"
+            style="width: 100%;height: 44px;">
+        <div class="c-topsearch__autosuggest c-topsearch__autosuggest--hidden"
+            data-url="/on/demandware.store/Sites-BAL-R-NOAM-Site/en_US/SearchServices-GetSuggestions?getRecentSearch=true&amp;getPopularSearch=true&amp;q="
+            data-ref="topSearchSuggestions" data-bind="searchSuggestions">
+        </div>
+    </div>
+    <div class="container mt-5">
+
+
+    	<div class="row">
+            @foreach(var sp in Model){
+    		<div class="col-md-3">
+
+
+
+    				<div class="card">
+
+    					<div class="image-container">
+
+    						<div class="first">
+    							
+    							<div class="d-flex justify-content-between align-items-center">
+
+    							<span class="discount">-25%</span>
+    							<span class="wishlist"><i class="fa fa-heart-o"></i></span>
+    							
+
+    						    </div>
+    						</div>
+
+                            <a asp-action="Details" asp-route-id="@sp.Id">
+    						<img src="~/Anh/@sp.Anh.Url" class="img-fluid rounded thumbnail-image">
+                            </a>
+    						
+
+    					</div>
+
+
+    					<div class="product-detail-container p-2">
+
+    							<div class="d-flex justify-content-between align-items-center">
+
+    								<h5 class="dress-name">@sp.SanPham.TenSp</h5>
+
+    								<div class="d-flex flex-column mb-2">
+
+    									<span class="new-price">@sp.GiaBan.ToString("C0",culture)</span>
+    									<small class="old-price text-right">@((sp.GiaBan*1.25).ToString("C0",culture))</small>
+    								</div>
+
+    							</div>
+
+
+    							<div class="d-flex justify-content-between align-items-center pt-1">
+
+    								<div class="color-select d-flex ">
+
+    									<input type="button" name="grey" class="btn creme">
+    									<input type="button" name="red" class="btn red ml-2">
+    									<input type="button" name="blue" class="btn blue ml-2">
+
+    								</div>
+
+    								<div class="d-flex ">
+    									
+    									<span class="item-size mr-2 btn" type="button">S</span>
+    									<span class="item-size mr-2 btn" type="button">M</span>
+    									<span class="item-size btn" type="button">L</span>
+
+    								</div>
+    								
+ 
+    							</div>
+
+
+    							<div class="d-flex justify-content-between align-items-center pt-1">
+    								<div>
+    									<i class="fa fa-star-o rating-star"></i>
+    									<span class="rating-number">4.8</span>
+    								</div>
+
+    								<span class="buy">BUY +</span>
+    								
+    							</div>
+
+    						
+
+    					</div>
+    					
+    				</div>
+
+
+
+
+
+    				<div class="mt-3">
+    					<div class="card voutchers">
+
+    						<div class="voutcher-divider">
+
+    							<div class="voutcher-left text-center">
+    								<span class="voutcher-name">Monday Happy</span>
+    								<h5 class="voutcher-code">#MONHPY</h5>
+    								
+    							</div>
+    							<div class="voutcher-right text-center border-left">
+    								<h5 class="discount-percent">20%</h5>
+    								<span class="off">Off</span>
+    								
+    							</div>
+    								
+    						</div>
+    						
+    					</div>
+    					
+    				</div>
+
+
+
+    				
+
+    			
+    		</div>
+
+            }
+    		
+
+    	</div>
+
+
+
+    	
+
+
+
+    </div>
+    </form>
+      @section scripts{
+    <script>
+        $(function () {           
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(2000).slideUp(500);
+        });
+ 
+    </script>}
+    @if (TempData["UpdateSuccess"] != null)
+            {
+                            <div id="AlertBox" class="alert alert-success">@TempData["UpdateSuccess"]</div>
+}
+
+
+
+
+

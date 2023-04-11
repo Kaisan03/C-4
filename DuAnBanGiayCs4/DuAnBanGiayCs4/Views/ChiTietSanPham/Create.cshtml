@@ -1,0 +1,89 @@
+﻿@model DuAnBanGiayCs4.Models.ChiTietSanPham
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ChiTietSanPham</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdSp" class="control-label"></label>
+                @*<input asp-for="IdSp" class="form-control" />*@
+                @Html.DropDownListFor(model=>model.IdSp,ViewBag.SanPham as SelectList,"--Select sản phẩm--",new {@class = "form-control"})
+                <span asp-validation-for="IdSp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdAnh" class="control-label"></label>
+                @Html.DropDownListFor(model=>model.IdAnh,ViewBag.Anh as SelectList,"--Select ảnh--",new {@class = "form-control"})
+                <span asp-validation-for="IdAnh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdSize" class="control-label"></label>
+                @Html.DropDownListFor(model=>model.IdSize,ViewBag.Size as SelectList,"--Select size--",new {@class = "form-control"})
+                <span asp-validation-for="IdSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdColor" class="control-label"></label>
+                @Html.DropDownListFor(model=>model.IdColor,ViewBag.MauSac as SelectList,"--Select màu--",new {@class = "form-control"})
+                <span asp-validation-for="IdColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNsx" class="control-label"></label>
+                <@Html.DropDownListFor(model=>model.IdNsx,ViewBag.Nsx as SelectList,"--Select Nsx--",new {@class = "form-control"})
+                <span asp-validation-for="IdNsx" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdLoai" class="control-label"></label>
+                <@Html.DropDownListFor(model=>model.IdLoai,ViewBag.Loai as SelectList,"--Select Nsx--",new {@class = "form-control"})
+                <span asp-validation-for="IdNsx" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuongTon" class="control-label"></label>
+                <input asp-for="SoLuongTon" class="form-control" />
+                <span asp-validation-for="SoLuongTon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaNhap" class="control-label"></label>
+                <input asp-for="GiaNhap" class="form-control" />
+                <span asp-validation-for="GiaNhap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaBan" class="control-label"></label>
+                <input asp-for="GiaBan" class="form-control" />
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrangThai" class="control-label"></label>
+                <input asp-for="TrangThai" class="form-control" />
+                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <input asp-for="MoTa" class="form-control" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ShowListCtsp">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

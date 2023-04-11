@@ -1,0 +1,52 @@
+﻿@model DuAnBanGiayCs4.ViewModel.LoginViewModel
+
+@{
+    ViewData["Title"] = "IndexLogin";
+
+}
+
+<head>
+    <title>Login </title>
+    <link rel="stylesheet" href="~/css/DangKy.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+  url(images/banner.jpg);">
+    <div class="login-box" style="height:350px">
+      <h1>Login</h1>
+       @using (Html.BeginForm("Login", "User", FormMethod.Post))
+        {
+            <div class="validation" asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label class="font-weight-semibold" for="userName">Username:</label>
+                <div class="input-affix">
+                    <i class="prefix-icon anticon anticon-user"></i>
+                    <input type="text" asp-for="UserName" class="form-control" id="userName" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-semibold" for="password">Password:</label>
+                <div class="input-affix m-b-10">
+                    <i class="prefix-icon anticon anticon-lock"></i>
+                    <input type="password" asp-for="PassWord" class="form-control" id="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="d-flex align-items-center justify-content-between">
+                    
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </div>
+            </div>
+        }
+    </div>
+    <p class="para-2">
+      Not have an account? <a asp-action="Create">Sign Up Here</a>
+      <a href="QuenMK.html">Forgot password</a>
+    </p>
+     <script src="~/assets/js/vendors.min.js"></script>
+    <script src="~/assets/js/app.min.js"></script>
+  </body>
+ 
